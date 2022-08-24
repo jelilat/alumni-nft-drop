@@ -17,6 +17,7 @@ contract AlumniERC721Drop is ERC721, ERC721URIStorage, Ownable {
     constructor() ERC721("Nethermind Internship Alumni", "NIA") {}
 
     function mint(address to, string memory uri) public onlyOwner {
+        require(balanceOf(to) == 0, "NFTDrop: address can't receive multiple drops");
         uint256 tokenId = _tokenIdCounter.current();
         _tokenIdCounter.increment();
         _safeMint(to, tokenId);
